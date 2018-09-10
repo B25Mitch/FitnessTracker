@@ -21,7 +21,7 @@ public class CustomerListActivity extends AppCompatActivity {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.customer_list_menu, menu);
-        inflater.inflate(R.menu.log_off_menu, menu);
+        inflater.inflate(R.menu.common_menu, menu);
         return true;
     }
 
@@ -43,8 +43,12 @@ public class CustomerListActivity extends AppCompatActivity {
                 intent = new Intent(this, CustomerEditActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.to_appointments:
+            case R.id.view_appointments:
                 intent = new Intent(this, AppointmentsListActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.view_customers:
+                intent = new Intent(this, CustomerListActivity.class);
                 startActivity(intent);
                 return true;
             default:

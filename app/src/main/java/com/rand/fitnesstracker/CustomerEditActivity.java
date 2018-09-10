@@ -19,6 +19,7 @@ public class CustomerEditActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.customer_edit_menu, menu);
         return true;
     }
 

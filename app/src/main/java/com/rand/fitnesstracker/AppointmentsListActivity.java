@@ -19,8 +19,7 @@ public class AppointmentsListActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.appointments_list_menu, menu);
-        inflater.inflate(R.menu.log_off_menu, menu);
+        inflater.inflate(R.menu.common_menu, menu);
         return true;
     }
 
@@ -38,7 +37,11 @@ public class AppointmentsListActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.to_customers:
+            case R.id.view_appointments:
+                intent = new Intent(this, AppointmentsListActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.view_customers:
                 intent = new Intent(this, CustomerListActivity.class);
                 startActivity(intent);
                 return true;

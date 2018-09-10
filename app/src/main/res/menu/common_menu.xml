@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/view_customers"
+        android:title="View All Customers" />
+    <item
+        android:id="@+id/view_appointments"
+        android:title="View All Appointments" />
+    <item
         android:id="@+id/log_off"
         android:title="@string/log_off" />
 </menu>

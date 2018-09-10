@@ -19,7 +19,7 @@ public class AppointmentViewActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.log_off_menu, menu);
+        inflater.inflate(R.menu.common_menu, menu);
         return true;
     }
 
@@ -40,6 +40,14 @@ public class AppointmentViewActivity extends AppCompatActivity {
             case R.id.log_off:
                 Toast.makeText(getApplicationContext(), "Logging Off", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.view_appointments:
+                intent = new Intent(this, AppointmentsListActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.view_customers:
+                intent = new Intent(this, CustomerListActivity.class);
                 startActivity(intent);
                 return true;
             default:

@@ -22,7 +22,7 @@
         <activity android:name=".CustomerAppointmentsActivity"
             android:label="Customer Appointments"/>
         <activity android:name=".CustomerEditActivity"
-            android:label="Edit Appointment"/>
+            android:label="Edit Customer"/>
         <activity android:name=".SignActivity"
             android:label="Sign"/>
         <activity android:name=".AppointmentsListActivity"
