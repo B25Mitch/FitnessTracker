@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <string name="address">Address</string>
+    <string name="app_name">FitnessTracker</string>
+    <string name="cancel">Cancel</string>
+    <string name="customer_list_activity_title">Customers</string>
+    <string name="delete_appointment">Delete Appointment</string>
+    <string name="delete_customer">Delete Customer</string>
+    <string name="edit_appointment">Edit Appointment</string>
+    <string name="edit_customer">Edit Customer</string>
+    <string name="example_customer">Example Customer</string>
+    <string name="fitness_level">Fitness Level</string>
+    <string name="jdoe">JDoe</string>
+    <string name="log_off">Log Off</string>
+    <string name="login_button">Login</string>
+    <string name="name">Name</string>
+    <string name="new_appointment">New Appointment</string>
+    <string name="new_customer">New Customer</string>
+    <string name="ok">OK</string>
+    <string name="password_request">Password:</string>
+    <string name="phone">Phone</string>
+    <string name="sample_appointment">Sample Appointment</string>
+    <string name="sign">Sign:</string>
+    <string name="username_request">Username:</string>
+    <string name="view_all_appointments">View All Appointments</string>
+    <string name="view_appointments">View Appointments</string>
+    <string name="view_customer">View Customer</string>
+    <string name="view_customer_list">View Customer List</string>
+    <string name="view_sample_appointment">View Sample Appointment</string>
+</resources>

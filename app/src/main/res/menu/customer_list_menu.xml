@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/to_appointments"
+        android:title="@string/view_all_appointments" />
+    <item
+        android:id="@+id/new_customer"
+        android:title="@string/new_customer"
+        app:showAsAction="collapseActionView" />
+</menu>
