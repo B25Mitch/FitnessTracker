@@ -3,6 +3,7 @@ package com.rand.fitnesstracker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +16,12 @@ public class CustomerListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_list);
+
+        Log.d("Tag1", "onCreate: CustomerListActivity");
+        CustomerDBHandler dbHandler = new CustomerDBHandler(this, null, null, 2);
+        Customer customer = new Customer("Joe Bob", "Bobson", "111 Super St.", "Syracuse", "NY", "13031", "Medium");
+        dbHandler.addCustomer(customer);
+        Toast.makeText(getApplicationContext(), dbHandler.findCustomer(customer.getId()).getFirstName(), Toast.LENGTH_SHORT).show();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
