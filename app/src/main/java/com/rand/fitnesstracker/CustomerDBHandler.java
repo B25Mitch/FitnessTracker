@@ -3,16 +3,12 @@ package com.rand.fitnesstracker;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
 
-import java.util.ArrayList;
-
-public class CustomerDBHandler extends SQLiteOpenHelper{
+class CustomerDBHandler extends SQLiteOpenHelper{
 
     private static final int DATABASE_VERSION = 7;
     private static final String DATABASE_NAME = "customerDB.db";
@@ -27,7 +23,8 @@ public class CustomerDBHandler extends SQLiteOpenHelper{
     private static final String COLUMN_ZIP = "zip";
     private static final String COLUMN_FITNESS_LEVEL = "fitness_level";
 
-    public CustomerDBHandler(Context context, String name,
+    @SuppressWarnings("unused")
+    public CustomerDBHandler(Context context,String name,
                              SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
@@ -100,8 +97,7 @@ public class CustomerDBHandler extends SQLiteOpenHelper{
         return customer;
     }
 
-    public boolean deleteCustomer(int customerID){
-        boolean result = false;
+    public void deleteCustomer(int customerID){
         String query = "Select * FROM " +
                 TABLE_CUSTOMERS +
                 " WHERE " +
@@ -116,15 +112,8 @@ public class CustomerDBHandler extends SQLiteOpenHelper{
         if (cursor.moveToFirst()){
             db.delete(TABLE_CUSTOMERS, COLUMN_ID + " = ?", new String[] {cursor.getString(0)});
             cursor.close();
-            result=true;
         }
         db.close();
-        return result;
-    }
-
-    public int countCustomers(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        return (int) DatabaseUtils.queryNumEntries(db, TABLE_CUSTOMERS);
     }
 
     public Customer[] getAllCustomers(){
@@ -137,6 +126,7 @@ public class CustomerDBHandler extends SQLiteOpenHelper{
             customers[index] = (findCustomer(Integer.parseInt(cursor.getString(0))));
             index++;
         }
+        cursor.close();
         return customers;
     }
 }

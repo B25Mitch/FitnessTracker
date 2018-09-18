@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+@SuppressWarnings("ALL")
 public class AppointmentViewActivity extends AppCompatActivity {
 
     @Override

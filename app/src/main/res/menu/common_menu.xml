@@ -3,10 +3,10 @@
 
     <item
         android:id="@+id/view_customers"
-        android:title="View All Customers" />
+        android:title="@string/view_all_customers" />
     <item
         android:id="@+id/view_appointments"
-        android:title="View All Appointments" />
+        android:title="@string/view_all_appointments" />
     <item
         android:id="@+id/log_off"
         android:title="@string/log_off" />

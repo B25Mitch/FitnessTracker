@@ -13,6 +13,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
+    @SuppressWarnings("unused")
     public void loginClick(View view){
         Intent intent = new Intent(this, CustomerListActivity.class);
         startActivity(intent);

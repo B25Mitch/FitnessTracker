@@ -1,20 +1,17 @@
 package com.rand.fitnesstracker;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static android.widget.Toast.LENGTH_SHORT;
@@ -25,7 +22,7 @@ public class CustomerListActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_list);
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.customer_linear_layout);
+        LinearLayout linearLayout = findViewById(R.id.customer_linear_layout);
 
         Log.d("Tag1", "onCreate: CustomerListActivity");
         CustomerDBHandler dbHandler = new CustomerDBHandler(this, null, null, 2);

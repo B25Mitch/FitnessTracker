@@ -31,8 +31,9 @@
             android:label="View Customer"/>
         <activity android:name=".AppointmentViewActivity"
             android:label="View Appointment"/>
-        <activity android:name=".AppointmentEditActivity"
-            android:label="Edit Appointment"></activity>
+        <activity
+            android:name=".AppointmentEditActivity"
+            android:label="Edit Appointment" />
     </application>
 
 </manifest>

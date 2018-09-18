@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class CustomerEditActivity extends AppCompatActivity {
 
-    int customerID;
+    private int customerID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,19 +26,19 @@ public class CustomerEditActivity extends AppCompatActivity {
         if(customerID != -1) {
             CustomerDBHandler dbHandler = new CustomerDBHandler(this, null, null, 1);
             Customer customer = dbHandler.findCustomer(customerID);
-            EditText editFirstName = (EditText) findViewById(R.id.edit_first_name);
+            EditText editFirstName = findViewById(R.id.edit_first_name);
             editFirstName.setText(customer.getFirstName());
-            EditText editLastName = (EditText) findViewById(R.id.edit_last_name);
+            EditText editLastName = findViewById(R.id.edit_last_name);
             editLastName.setText(customer.getLastName());
-            EditText editAddress = (EditText) findViewById(R.id.edit_address);
+            EditText editAddress = findViewById(R.id.edit_address);
             editAddress.setText(customer.getAddress());
-            EditText editState = (EditText) findViewById(R.id.edit_state);
+            EditText editState = findViewById(R.id.edit_state);
             editState.setText(customer.getState());
-            EditText editCity = (EditText) findViewById(R.id.edit_city);
+            EditText editCity = findViewById(R.id.edit_city);
             editCity.setText(customer.getCity());
-            EditText editZip = (EditText) findViewById(R.id.edit_zip);
+            EditText editZip = findViewById(R.id.edit_zip);
             editZip.setText(customer.getZip());
-            EditText editFitness = (EditText) findViewById(R.id.edit_fitness);
+            EditText editFitness = findViewById(R.id.edit_fitness);
             editFitness.setText(customer.getFitnessLevel());
         }
     }
@@ -49,25 +49,25 @@ public class CustomerEditActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressWarnings("unused")
     public void okClick(View view){
         CustomerDBHandler dbHandler = new CustomerDBHandler(this, null, null, 1);
         if (customerID != -1) {
-            Customer customer = dbHandler.findCustomer(customerID);
             dbHandler.deleteCustomer(customerID);
         }
-        EditText editFirstName = (EditText) findViewById(R.id.edit_first_name);
+        EditText editFirstName = findViewById(R.id.edit_first_name);
         String firstName = editFirstName.getText().toString();
-        EditText editLastName = (EditText) findViewById(R.id.edit_last_name);
+        EditText editLastName = findViewById(R.id.edit_last_name);
         String lastName = editLastName.getText().toString();
-        EditText editAddress = (EditText) findViewById(R.id.edit_address);
+        EditText editAddress = findViewById(R.id.edit_address);
         String address = editAddress.getText().toString();
-        EditText editState = (EditText) findViewById(R.id.edit_state);
+        EditText editState = findViewById(R.id.edit_state);
         String state = editState.getText().toString();
-        EditText editCity = (EditText) findViewById(R.id.edit_city);
+        EditText editCity = findViewById(R.id.edit_city);
         String city = editCity.getText().toString();
-        EditText editZip = (EditText) findViewById(R.id.edit_zip);
+        EditText editZip = findViewById(R.id.edit_zip);
         String zip = editZip.getText().toString();
-        EditText editFitness = (EditText) findViewById(R.id.edit_fitness);
+        EditText editFitness = findViewById(R.id.edit_fitness);
         String fitness = editFitness.getText().toString();
 
 
@@ -77,6 +77,7 @@ public class CustomerEditActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @SuppressWarnings("unused")
     public void cancelClick(View view){
         if(customerID != -1) {
             Intent intent = new Intent(this, CustomerViewActivity.class);

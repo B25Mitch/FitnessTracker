@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,10 +11,9 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name:" />
+            android:text="@string/name" />
 
         <TextView
             android:id="@+id/view_name"
@@ -23,10 +21,9 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/textView15"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Address:" />
+            android:text="@string/address" />
 
         <TextView
             android:id="@+id/view_address"
@@ -34,10 +31,9 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/textView17"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="City:" />
+            android:text="@string/city" />
 
         <TextView
             android:id="@+id/view_city"
@@ -50,18 +46,16 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView19"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="State:" />
+                android:text="@string/state" />
 
             <TextView
-                android:id="@+id/textView24"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Zip:" />
+                android:text="@string/zip" />
         </LinearLayout>
 
         <LinearLayout
@@ -83,10 +77,9 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView21"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Fitness Level:" />
+            android:text="@string/fitness_level" />
 
         <TextView
             android:id="@+id/view_fitness"
@@ -99,7 +92,6 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -107,7 +99,6 @@
                 android:text="@string/edit_customer" />
 
             <Button
-                android:id="@+id/button5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

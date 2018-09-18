@@ -23,6 +23,7 @@ public class AppointmentsListActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressWarnings("unused")
     public void sampleAppointmentClick(View view){
         Intent intent = new Intent(this, AppointmentViewActivity.class);
         startActivity(intent);

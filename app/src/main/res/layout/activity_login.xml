@@ -18,33 +18,32 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/username_request" />
+            android:text="@string/username_request"
+            android:labelFor="@id/edit_username"/>
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/edit_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"/>
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/password_request" />
+            android:text="@string/password_request"
+            android:labelFor="@id/edit_password"/>
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/edit_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="loginClick"
