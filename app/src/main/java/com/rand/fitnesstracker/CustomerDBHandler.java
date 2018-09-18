@@ -4,14 +4,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class CustomerDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 7;
     private static final String DATABASE_NAME = "customerDB.db";
     private static final String TABLE_CUSTOMERS = "customers";
 
@@ -33,7 +36,7 @@ public class CustomerDBHandler extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CUSTOMERS_TABLE = "CREATE TABLE " +
                 TABLE_CUSTOMERS + "(" +
-                COLUMN_ID + " INTEGER, " +
+                COLUMN_ID + " INTEGER PRIMARY KEY, " +
                 COLUMN_FIRST_NAME + " TEXT, " +
                 COLUMN_LAST_NAME + " TEXT, " +
                 COLUMN_ADDRESS + " TEXT, " +
@@ -51,9 +54,8 @@ public class CustomerDBHandler extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    public void addCustomer(Customer customer){
+    public int addCustomer(Customer customer){
         ContentValues values = new ContentValues();
-        values.put(COLUMN_ID, customer.getId());
         values.put(COLUMN_FIRST_NAME, customer.getFirstName());
         values.put(COLUMN_LAST_NAME, customer.getLastName());
         values.put(COLUMN_ADDRESS, customer.getAddress());
@@ -63,8 +65,9 @@ public class CustomerDBHandler extends SQLiteOpenHelper{
         values.put(COLUMN_FITNESS_LEVEL, customer.getFitnessLevel());
 
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABLE_CUSTOMERS, null, values);
+        int returnValue = (int)db.insert(TABLE_CUSTOMERS, null, values);
         db.close();
+        return returnValue;
     }
 
     public Customer findCustomer(int id){
@@ -117,5 +120,23 @@ public class CustomerDBHandler extends SQLiteOpenHelper{
         }
         db.close();
         return result;
+    }
+
+    public int countCustomers(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        return (int) DatabaseUtils.queryNumEntries(db, TABLE_CUSTOMERS);
+    }
+
+    public Customer[] getAllCustomers(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Customer[] customers = new Customer[(int)DatabaseUtils.queryNumEntries(db, TABLE_CUSTOMERS)];
+        String[] columns = {COLUMN_ID};
+        Cursor cursor = db.query(TABLE_CUSTOMERS, columns,null, null, null, null, null);
+        int index = 0;
+        while(cursor.moveToNext()){
+            customers[index] = (findCustomer(Integer.parseInt(cursor.getString(0))));
+            index++;
+        }
+        return customers;
     }
 }

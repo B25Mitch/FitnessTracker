@@ -1,7 +1,8 @@
 package com.rand.fitnesstracker;
 
+import java.util.Comparator;
+
 public class Customer {
-    private static int count = 0;
     private int _id;
     private String _firstName;
     private String _address;
@@ -19,7 +20,6 @@ public class Customer {
         _city = city;
         _state = state;
         _zip = zip;
-        _id = ++count;
         _firstName = firstName;
         _address = address;
         _fitnessLevel = fitnessLevel;
@@ -87,5 +87,15 @@ public class Customer {
 
     public void setState(String state) {
         _state = state;
+    }
+}
+
+class SortByName implements Comparator<Customer>{
+
+    @Override
+    public int compare(Customer o1, Customer o2) {
+        String name1 = o1.getFirstName() + " " + o1.getLastName();
+        String name2 = o2.getFirstName() + " " + o2.getLastName();
+        return name1.compareTo(name2);
     }
 }
