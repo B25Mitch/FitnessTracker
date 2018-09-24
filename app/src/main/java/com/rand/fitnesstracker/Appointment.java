@@ -10,7 +10,7 @@ public class Appointment {
     private int _customerID;
     private String _location;
 
-    public Appointment(){
+    public Appointment() {
     }
 
     public Appointment(Timestamp appointmentTime, int customerID, String location) {
@@ -53,7 +53,7 @@ public class Appointment {
 
 }
 
-class SortByNameAppointment implements Comparator<Appointment>{
+class SortByNameAppointment implements Comparator<Appointment> {
 
     @Override
     public int compare(Appointment o1, Appointment o2) {

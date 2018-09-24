@@ -52,25 +52,21 @@ public class CustomerListActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
+        MenuFunctions menuFunctions = new MenuFunctions();
         switch (item.getItemId()) {
-            case R.id.log_off:
-                Toast.makeText(getApplicationContext(), "Logging Off", LENGTH_SHORT).show();
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-                return true;
             case R.id.new_customer:
-                intent = new Intent(this, CustomerEditActivity.class);
+                Intent intent = new Intent(this, CustomerEditActivity.class);
                 intent.putExtra("CUSTOMER_ID", -1);
                 startActivity(intent);
+                return true;
+            case R.id.log_off:
+                menuFunctions.logOff();
                 return true;
             case R.id.view_appointments:
-                intent = new Intent(this, AppointmentsListActivity.class);
-                intent.putExtra("CUSTOMER_ID", -1);
-                startActivity(intent);
+                menuFunctions.viewAllAppointments();
                 return true;
             case R.id.view_customers:
-                intent = new Intent(this, CustomerListActivity.class);
-                startActivity(intent);
+                menuFunctions.viewAllCustomers();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

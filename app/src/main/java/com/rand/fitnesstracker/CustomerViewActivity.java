@@ -8,7 +8,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class CustomerViewActivity extends AppCompatActivity {
 
@@ -40,46 +39,42 @@ public class CustomerViewActivity extends AppCompatActivity {
         viewFitness.setText(customer.getFitnessLevel());
     }
 
+    @SuppressWarnings("unused")
+    public void editCustomerClick(View view) {
+        Intent intent = new Intent(this, CustomerEditActivity.class);
+        intent.putExtra("CUSTOMER_ID", customerID);
+        startActivity(intent);
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.common_menu, menu);
         return true;
     }
 
-    @SuppressWarnings("unused")
-    public void editCustomerClick(View view){
-        Intent intent = new Intent(this, CustomerEditActivity.class);
-        intent.putExtra("CUSTOMER_ID", customerID);
-        startActivity(intent);
-    }
-
-    @SuppressWarnings("unused")
-    public void viewAppointmentsClick(View view){
-        Intent intent = new Intent(this, AppointmentsListActivity.class);
-        intent.putExtra("CUSTOMER_ID", customerID);
-        startActivity(intent);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
+        MenuFunctions menuFunctions = new MenuFunctions();
         switch (item.getItemId()) {
             case R.id.log_off:
-                Toast.makeText(getApplicationContext(), "Logging Off", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
+                menuFunctions.logOff();
                 return true;
             case R.id.view_appointments:
-                intent = new Intent(this, AppointmentsListActivity.class);
-                intent.putExtra("CUSTOMER_ID", -1);
-                startActivity(intent);
+                menuFunctions.viewAllAppointments();
                 return true;
             case R.id.view_customers:
-                intent = new Intent(this, CustomerListActivity.class);
-                startActivity(intent);
+                menuFunctions.viewAllCustomers();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @SuppressWarnings("unused")
+    public void viewAppointmentsClick(View view) {
+        Intent intent = new Intent(this, AppointmentsListActivity.class);
+        intent.putExtra("CUSTOMER_ID", customerID);
+        startActivity(intent);
     }
 }
