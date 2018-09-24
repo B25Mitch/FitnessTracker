@@ -38,6 +38,7 @@
                 android:id="@+id/appointment_date_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:datePickerMode="spinner"
                 android:calendarViewShown="false"/>
 
             <TextView
@@ -50,8 +51,7 @@
                 android:id="@+id/appointment_time_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:timePickerMode="spinner"
-                tools:targetApi="lollipop" />
+                android:timePickerMode="spinner"/>
 
             <TextView
                 android:id="@+id/textView6"
