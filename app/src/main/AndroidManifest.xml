@@ -19,8 +19,6 @@
         </activity>
         <activity android:name=".CustomerListActivity"
             android:label="@string/customer_list_activity_title"/>
-        <activity android:name=".CustomerAppointmentsActivity"
-            android:label="Customer Appointments"/>
         <activity android:name=".CustomerEditActivity"
             android:label="Edit Customer"/>
         <activity android:name=".SignActivity"

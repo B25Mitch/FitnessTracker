@@ -6,11 +6,10 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 class CustomerDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
     private static final String DATABASE_NAME = "customerDB.db";
     private static final String TABLE_CUSTOMERS = "customers";
 
@@ -68,20 +67,15 @@ class CustomerDBHandler extends SQLiteOpenHelper{
     }
 
     public Customer findCustomer(int id){
-        String query = "Select * FROM " +
-                TABLE_CUSTOMERS +
-                " WHERE " +
-                COLUMN_ID +
-                " = " +
-                id;
+        String selection = COLUMN_ID + " = ?";
+        String[] selectionArgs = {Integer.toString(id)};
         SQLiteDatabase db = this.getWritableDatabase();
-        Log.d("TAG1", "findCustomer");
-        Cursor cursor = db.rawQuery(query, null);
+        Cursor cursor = db.query(TABLE_CUSTOMERS, null, selection, selectionArgs, null, null, null);
         Customer customer = new Customer();
 
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
-            customer.setId(Integer.parseInt(cursor.getString(0)));
+            customer.setId(cursor.getInt(0));
             customer.setFirstName(cursor.getString(1));
             customer.setLastName(cursor.getString(2));
             customer.setAddress(cursor.getString(3));
@@ -98,21 +92,10 @@ class CustomerDBHandler extends SQLiteOpenHelper{
     }
 
     public void deleteCustomer(int customerID){
-        String query = "Select * FROM " +
-                TABLE_CUSTOMERS +
-                " WHERE " +
-                COLUMN_ID +
-                " = \"" +
-                customerID +
-                "\"";
-
+        String selection = COLUMN_ID + " = ?";
+        String[] selectionArgs = new String[]{Integer.toString(customerID)};
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-
-        if (cursor.moveToFirst()){
-            db.delete(TABLE_CUSTOMERS, COLUMN_ID + " = ?", new String[] {cursor.getString(0)});
-            cursor.close();
-        }
+        db.delete(TABLE_CUSTOMERS, selection, selectionArgs);
         db.close();
     }
 
@@ -128,5 +111,21 @@ class CustomerDBHandler extends SQLiteOpenHelper{
         }
         cursor.close();
         return customers;
+    }
+
+    public void modifyCustomer(Customer customer){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_FIRST_NAME, customer.getFirstName());
+        values.put(COLUMN_LAST_NAME, customer.getLastName());
+        values.put(COLUMN_ADDRESS, customer.getAddress());
+        values.put(COLUMN_CITY, customer.getCity());
+        values.put(COLUMN_STATE, customer.getState());
+        values.put(COLUMN_ZIP, customer.getZip());
+        values.put(COLUMN_FITNESS_LEVEL, customer.getFitnessLevel());
+        String selection = COLUMN_ID + " = ?";
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] comparison = {Integer.toString(customer.getId())};
+        db.update(TABLE_CUSTOMERS, values, selection, comparison);
+        db.close();
     }
 }

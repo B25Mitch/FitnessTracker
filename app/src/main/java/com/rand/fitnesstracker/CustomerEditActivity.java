@@ -1,6 +1,8 @@
 package com.rand.fitnesstracker;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class CustomerEditActivity extends AppCompatActivity {
 
@@ -52,9 +53,6 @@ public class CustomerEditActivity extends AppCompatActivity {
     @SuppressWarnings("unused")
     public void okClick(View view){
         CustomerDBHandler dbHandler = new CustomerDBHandler(this, null, null, 1);
-        if (customerID != -1) {
-            dbHandler.deleteCustomer(customerID);
-        }
         EditText editFirstName = findViewById(R.id.edit_first_name);
         String firstName = editFirstName.getText().toString();
         EditText editLastName = findViewById(R.id.edit_last_name);
@@ -70,8 +68,13 @@ public class CustomerEditActivity extends AppCompatActivity {
         EditText editFitness = findViewById(R.id.edit_fitness);
         String fitness = editFitness.getText().toString();
 
-
-        int newID = dbHandler.addCustomer(new Customer(firstName, lastName, address, city, state, zip, fitness));
+        Customer customer = new Customer(firstName, lastName, address, city, state, zip, fitness);
+        int newID = customerID;
+        if (customerID != -1){
+            dbHandler.modifyCustomer(customer);}
+        else{
+            newID = dbHandler.addCustomer(customer);
+        }
         Intent intent = new Intent(this, CustomerViewActivity.class);
         intent.putExtra("CUSTOMER_ID", newID);
         startActivity(intent);
@@ -93,9 +96,28 @@ public class CustomerEditActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.delete_customer:
-                Toast.makeText(getApplicationContext(), "Customer Deleted (NYI)", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, CustomerListActivity.class);
-                startActivity(intent);
+                AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(CustomerEditActivity.this);
+                myAlertDialog.setTitle("Delete");
+                myAlertDialog.setMessage("Are you sure you want to delete?");
+                myAlertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        CustomerDBHandler customerDBHandler = new CustomerDBHandler(CustomerEditActivity.this, null, null, 1);
+                        AppointmentDBHandler appointmentDBHandler = new AppointmentDBHandler(CustomerEditActivity.this, null, null, 1);
+                        Appointment[] appointments = appointmentDBHandler.getAllAppointments(customerID);
+                        for(Appointment appointment : appointments){
+                            appointmentDBHandler.deleteAppointment(appointment.getId());
+                        }
+                        customerDBHandler.deleteCustomer(customerID);
+                        Intent intent = new Intent(CustomerEditActivity.this, CustomerListActivity.class);
+                        startActivity(intent);
+                    }});
+                myAlertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        // do nothing
+                    }});
+                myAlertDialog.show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

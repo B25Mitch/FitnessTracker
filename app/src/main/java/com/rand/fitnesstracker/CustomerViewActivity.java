@@ -3,7 +3,6 @@ package com.rand.fitnesstracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,11 +20,10 @@ public class CustomerViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_customer_view);
         Bundle extras = getIntent().getExtras();
 
-        customerID = 0;
+        customerID = -1;
         if (extras != null) {
             customerID = extras.getInt("CUSTOMER_ID");
         }
-        Log.d("TAG!", "" + customerID);
         CustomerDBHandler dbHandler = new CustomerDBHandler(this, null, null, 1);
         Customer customer = dbHandler.findCustomer(customerID);
         TextView viewName = findViewById(R.id.view_name);
@@ -57,7 +55,8 @@ public class CustomerViewActivity extends AppCompatActivity {
 
     @SuppressWarnings("unused")
     public void viewAppointmentsClick(View view){
-        Intent intent = new Intent(this, CustomerAppointmentsActivity.class);
+        Intent intent = new Intent(this, AppointmentsListActivity.class);
+        intent.putExtra("CUSTOMER_ID", customerID);
         startActivity(intent);
     }
 
@@ -72,6 +71,7 @@ public class CustomerViewActivity extends AppCompatActivity {
                 return true;
             case R.id.view_appointments:
                 intent = new Intent(this, AppointmentsListActivity.class);
+                intent.putExtra("CUSTOMER_ID", -1);
                 startActivity(intent);
                 return true;
             case R.id.view_customers:

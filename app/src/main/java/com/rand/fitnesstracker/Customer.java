@@ -90,7 +90,7 @@ public class Customer {
     }
 }
 
-class SortByName implements Comparator<Customer>{
+class SortByNameCustomer implements Comparator<Customer>{
 
     @Override
     public int compare(Customer o1, Customer o2) {

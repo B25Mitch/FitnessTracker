@@ -15,13 +15,11 @@
     <string name="new_customer">New Customer</string>
     <string name="ok">OK</string>
     <string name="password_request">Password:</string>
-    <string name="sample_appointment">Sample Appointment</string>
     <string name="sign">Sign:</string>
     <string name="username_request">Username:</string>
     <string name="view_all_appointments">View All Appointments</string>
     <string name="view_appointments">View Appointments</string>
     <string name="view_customer">View Customer</string>
-    <string name="view_sample_appointment">View Sample Appointment</string>
     <string name="view_all_customers">View All Customers</string>
     <string name="first_name">First Name:</string>
     <string name="last_name">Last Name:</string>
@@ -30,4 +28,9 @@
     <string name="state">State:</string>
     <string name="zip">Zip:</string>
     <string name="fitness_level">Fitness Level:</string>
+    <string name="date">Date:</string>
+    <string name="time">Time:</string>
+    <string name="location">Location:</string>
+    <string name="customer_name">Customer Name:</string>
+    <string name="appointment_time">Appointment Time:</string>
 </resources>

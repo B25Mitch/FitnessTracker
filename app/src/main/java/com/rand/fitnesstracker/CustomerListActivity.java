@@ -3,7 +3,6 @@ package com.rand.fitnesstracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,15 +22,13 @@ public class CustomerListActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_list);
         LinearLayout linearLayout = findViewById(R.id.customer_linear_layout);
-
-        Log.d("Tag1", "onCreate: CustomerListActivity");
         CustomerDBHandler dbHandler = new CustomerDBHandler(this, null, null, 2);
         Customer[] customers = dbHandler.getAllCustomers();
-        Arrays.sort(customers, new SortByName());
-        for (Customer customer1 : customers) {
+        Arrays.sort(customers, new SortByNameCustomer());
+        for (Customer customer : customers) {
             Button button = new Button(this);
-            button.setText(String.format("%s %s", customer1.getFirstName(), customer1.getLastName()));
-            final int CUSTOMER_ID = customer1.getId();
+            button.setText(String.format("%s %s", customer.getFirstName(), customer.getLastName()));
+            final int CUSTOMER_ID = customer.getId();
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -68,6 +65,7 @@ public class CustomerListActivity extends AppCompatActivity{
                 return true;
             case R.id.view_appointments:
                 intent = new Intent(this, AppointmentsListActivity.class);
+                intent.putExtra("CUSTOMER_ID", -1);
                 startActivity(intent);
                 return true;
             case R.id.view_customers:

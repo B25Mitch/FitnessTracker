@@ -5,21 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".AppointmentsListActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ScrollView
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="match_parent">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/appointments_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Eventually there will be a list of customer appointments here. Click the button below to view a sample appointment" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="sampleAppointmentClick"
-            android:text="@string/sample_appointment" />
-    </LinearLayout>
-
+            android:orientation="vertical" />
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

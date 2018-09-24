@@ -11,9 +11,37 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="This will eventually show the information for the appointment selected either from appointments list or customer appointments." />
+            android:text="@string/customer_name" />
+
+        <TextView
+            android:id="@+id/view_customer_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/appointment_time" />
+
+        <TextView
+            android:id="@+id/view_appointment_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/location" />
+
+        <TextView
+            android:id="@+id/view_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,19 +49,20 @@
             android:orientation="horizontal">
 
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="editAppointmentClick"
-                android:text="@string/edit_appointment" />
-
-            <Button
-                android:layout_width="match_parent"
+                android:id="@+id/go_to_customer"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="viewCustomerClick"
                 android:text="@string/view_customer" />
-        </LinearLayout>
 
+            <Button
+                android:id="@+id/go_to_edit_appointment"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="editAppointmentClick"
+                android:text="@string/edit_appointment" />
+        </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -118,6 +118,7 @@
                 android:orientation="horizontal">
 
                 <Button
+                    style="@android:style/ButtonBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -125,6 +126,7 @@
                     android:text="@string/cancel" />
 
                 <Button
+                    style="@android:style/ButtonBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
