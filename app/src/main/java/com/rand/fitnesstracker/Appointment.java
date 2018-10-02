@@ -10,13 +10,29 @@ public class Appointment {
     private int _customerID;
     private String _location;
 
-    public Appointment() {
+    Appointment() {
     }
 
-    public Appointment(Timestamp appointmentTime, int customerID, String location) {
+    Appointment(Timestamp appointmentTime, int customerID, String location) {
         _appointmentTime = appointmentTime;
         _customerID = customerID;
         _location = location;
+    }
+
+    Date getAppointmentTime() {
+        return _appointmentTime;
+    }
+
+    void setAppointmentTime(Timestamp appointmentTime) {
+        _appointmentTime = appointmentTime;
+    }
+
+    int getCustomerID() {
+        return _customerID;
+    }
+
+    void setCustomerID(int customerID) {
+        _customerID = customerID;
     }
 
     public int getId() {
@@ -25,22 +41,6 @@ public class Appointment {
 
     public void setId(int id) {
         _id = id;
-    }
-
-    public Date getAppointmentTime() {
-        return _appointmentTime;
-    }
-
-    public void setAppointmentTime(Timestamp appointmentTime) {
-        _appointmentTime = appointmentTime;
-    }
-
-    public int getCustomerID() {
-        return _customerID;
-    }
-
-    public void setCustomerID(int customerID) {
-        _customerID = customerID;
     }
 
     public String getLocation() {

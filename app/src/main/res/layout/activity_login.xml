@@ -28,7 +28,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"/>
+            android:inputType="textPersonName"
+            android:autofillHints=""
+            tools:targetApi="o" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -41,7 +43,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:autofillHints=""
+            tools:targetApi="o" />
 
         <Button
             android:layout_width="wrap_content"

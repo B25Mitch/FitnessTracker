@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CustomerViewActivity extends AppCompatActivity {
@@ -37,6 +38,10 @@ public class CustomerViewActivity extends AppCompatActivity {
         viewZip.setText(customer.getZip());
         TextView viewFitness = findViewById(R.id.view_fitness);
         viewFitness.setText(customer.getFitnessLevel());
+        if (!customer.getPortraitLocation().toString().equals("")) {
+            ImageView imageView = findViewById(R.id.view_customer_portrait);
+            imageView.setImageURI(customer.getPortraitLocation());
+        }
     }
 
     @SuppressWarnings("unused")
@@ -58,13 +63,13 @@ public class CustomerViewActivity extends AppCompatActivity {
         MenuFunctions menuFunctions = new MenuFunctions();
         switch (item.getItemId()) {
             case R.id.log_off:
-                menuFunctions.logOff();
+                menuFunctions.logOff(this);
                 return true;
             case R.id.view_appointments:
-                menuFunctions.viewAllAppointments();
+                menuFunctions.viewAllAppointments(this);
                 return true;
             case R.id.view_customers:
-                menuFunctions.viewAllCustomers();
+                menuFunctions.viewAllCustomers(this);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -1,14 +1,13 @@
 package com.rand.fitnesstracker;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 @SuppressWarnings("ALL")
 public class AppointmentViewActivity extends AppCompatActivity {
@@ -23,7 +22,7 @@ public class AppointmentViewActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         appointmentID = -1;
-        if (extras != null){
+        if (extras != null) {
             appointmentID = extras.getInt("APPOINTMENT_ID");
         }
         AppointmentDBHandler appointmentDBHandler = new AppointmentDBHandler(this, null, null, 1);
@@ -45,14 +44,14 @@ public class AppointmentViewActivity extends AppCompatActivity {
         return true;
     }
 
-    public void editAppointmentClick(View view){
+    public void editAppointmentClick(View view) {
         Intent intent = new Intent(this, AppointmentEditActivity.class);
         intent.putExtra("CUSTOMER_ID", customerID);
         intent.putExtra("APPOINTMENT_ID", appointmentID);
         startActivity(intent);
     }
 
-    public void viewCustomerClick(View view){
+    public void viewCustomerClick(View view) {
         Intent intent = new Intent(this, CustomerViewActivity.class);
         intent.putExtra("CUSTOMER_ID", customerID);
         startActivity(intent);
@@ -64,13 +63,13 @@ public class AppointmentViewActivity extends AppCompatActivity {
         MenuFunctions menuFunctions = new MenuFunctions();
         switch (item.getItemId()) {
             case R.id.log_off:
-                menuFunctions.logOff();
+                menuFunctions.logOff(this);
                 return true;
             case R.id.view_appointments:
-                menuFunctions.viewAllAppointments();
+                menuFunctions.viewAllAppointments(this);
                 return true;
             case R.id.view_customers:
-                menuFunctions.viewAllCustomers();
+                menuFunctions.viewAllCustomers(this);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

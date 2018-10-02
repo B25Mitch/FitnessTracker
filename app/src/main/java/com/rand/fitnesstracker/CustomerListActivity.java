@@ -9,13 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.util.Arrays;
 
-import static android.widget.Toast.LENGTH_SHORT;
-
-public class CustomerListActivity extends AppCompatActivity{
+public class CustomerListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +57,13 @@ public class CustomerListActivity extends AppCompatActivity{
                 startActivity(intent);
                 return true;
             case R.id.log_off:
-                menuFunctions.logOff();
+                menuFunctions.logOff(this);
                 return true;
             case R.id.view_appointments:
-                menuFunctions.viewAllAppointments();
+                menuFunctions.viewAllAppointments(this);
                 return true;
             case R.id.view_customers:
-                menuFunctions.viewAllCustomers();
+                menuFunctions.viewAllCustomers(this);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

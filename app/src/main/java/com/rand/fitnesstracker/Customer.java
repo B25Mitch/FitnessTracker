@@ -1,5 +1,7 @@
 package com.rand.fitnesstracker;
 
+import android.net.Uri;
+
 import java.util.Comparator;
 
 public class Customer {
@@ -11,11 +13,12 @@ public class Customer {
     private String _city;
     private String _zip;
     private String _state;
+    private Uri _portraitLocation;
 
-    public Customer(){
+    public Customer() {
     }
 
-    public Customer(String firstName, String lastName, String address, String city, String state, String zip, String fitnessLevel) {
+    public Customer(String firstName, String lastName, String address, String city, String state, String zip, String fitnessLevel, Uri portraitLocation) {
         _lastName = lastName;
         _city = city;
         _state = state;
@@ -23,21 +26,26 @@ public class Customer {
         _firstName = firstName;
         _address = address;
         _fitnessLevel = fitnessLevel;
+        _portraitLocation = portraitLocation;
     }
 
     public int getId() {
         return _id;
     }
 
-    public void setId(int id){
+    Uri getPortraitLocation() {
+        return _portraitLocation;
+    }
+
+    public void setId(int id) {
         _id = id;
     }
 
-    public String getFirstName() {
+    String getFirstName() {
         return _firstName;
     }
 
-    public void setFirstName(String firstName) {
+    void setFirstName(String firstName) {
         _firstName = firstName;
     }
 
@@ -49,19 +57,19 @@ public class Customer {
         _address = address;
     }
 
-    public String getFitnessLevel() {
+    String getFitnessLevel() {
         return _fitnessLevel;
     }
 
-    public void setFitnessLevel(String fitnessLevel) {
+    void setFitnessLevel(String fitnessLevel) {
         _fitnessLevel = fitnessLevel;
     }
 
-    public String getLastName() {
+    String getLastName() {
         return _lastName;
     }
 
-    public void setLastName(String lastName) {
+    void setLastName(String lastName) {
         _lastName = lastName;
     }
 
@@ -77,6 +85,10 @@ public class Customer {
         return _zip;
     }
 
+    void setPortraitLocation(Uri portraitLocation) {
+        _portraitLocation = portraitLocation;
+    }
+
     public void setZip(String zip) {
         _zip = zip;
     }
@@ -90,7 +102,7 @@ public class Customer {
     }
 }
 
-class SortByNameCustomer implements Comparator<Customer>{
+class SortByNameCustomer implements Comparator<Customer> {
 
     @Override
     public int compare(Customer o1, Customer o2) {

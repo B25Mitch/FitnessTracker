@@ -54,7 +54,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="viewCustomerClick"
-                android:text="@string/view_customer" />
+                android:text="@string/view_customer"
+                tools:ignore="ButtonStyle" />
 
             <Button
                 android:id="@+id/go_to_edit_appointment"
@@ -62,7 +63,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="editAppointmentClick"
-                android:text="@string/edit_appointment" />
+                android:text="@string/edit_appointment"
+                tools:ignore="ButtonStyle" />
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

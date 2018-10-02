@@ -9,7 +9,7 @@ import android.util.Log;
 
 import java.sql.Timestamp;
 
-class AppointmentDBHandler extends SQLiteOpenHelper{
+class AppointmentDBHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 8;
     private static final String DATABASE_NAME = "appointmentDB.db";
@@ -21,8 +21,8 @@ class AppointmentDBHandler extends SQLiteOpenHelper{
     private static final String COLUMN_LOCATION = "location";
 
     @SuppressWarnings("unused")
-    public AppointmentDBHandler(Context context, String name,
-                                SQLiteDatabase.CursorFactory factory, int version) {
+    AppointmentDBHandler(Context context, String name,
+                         SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
@@ -44,19 +44,19 @@ class AppointmentDBHandler extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    public int addAppointment(Appointment appointment){
+    int addAppointment(Appointment appointment) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_APPOINTMENT_TIME, appointment.getAppointmentTime().toString());
         values.put(COLUMN_CUSTOMER_ID, appointment.getCustomerID());
         values.put(COLUMN_LOCATION, appointment.getLocation());
 
         SQLiteDatabase db = this.getWritableDatabase();
-        int returnValue = (int)db.insert(TABLE_APPOINTMENTS, null, values);
+        int returnValue = (int) db.insert(TABLE_APPOINTMENTS, null, values);
         db.close();
         return returnValue;
     }
 
-    public Appointment findAppointment(int id){
+    Appointment findAppointment(int id) {
         String selection = COLUMN_ID + " = ?";
         String[] selectionArgs = {Integer.toString(id)};
         SQLiteDatabase db = this.getWritableDatabase();
@@ -71,14 +71,14 @@ class AppointmentDBHandler extends SQLiteOpenHelper{
             appointment.setCustomerID(cursor.getInt(2));
             appointment.setLocation(cursor.getString(3));
             cursor.close();
-        }else{
+        } else {
             appointment = null;
         }
         db.close();
         return appointment;
     }
 
-    public void deleteAppointment(int appointmentID){
+    void deleteAppointment(int appointmentID) {
         String selection = COLUMN_ID + " = ?";
         String[] selectionArgs = {Integer.toString(appointmentID)};
         SQLiteDatabase db = this.getWritableDatabase();
@@ -86,18 +86,18 @@ class AppointmentDBHandler extends SQLiteOpenHelper{
         db.close();
     }
 
-    public Appointment[] getAllAppointments(int customerID){
+    Appointment[] getAllAppointments(int customerID) {
         SQLiteDatabase db = this.getReadableDatabase();
         String selection = null;
         String[] selectionArgs = null;
-        if (customerID != -1){
+        if (customerID != -1) {
             selection = COLUMN_CUSTOMER_ID + " = ?";
             selectionArgs = new String[]{Integer.toString(customerID)};
         }
         Cursor cursor = db.query(TABLE_APPOINTMENTS, null, selection, selectionArgs, null, null, null);
         int index = 0;
         Appointment[] appointments = new Appointment[cursor.getCount()];
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             appointments[index] = (findAppointment(Integer.parseInt(cursor.getString(0))));
             index++;
         }
@@ -105,7 +105,7 @@ class AppointmentDBHandler extends SQLiteOpenHelper{
         return appointments;
     }
 
-    public void modifyAppointment(Appointment appointment){
+    void modifyAppointment(Appointment appointment) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_LOCATION, appointment.getLocation());
         values.put(COLUMN_APPOINTMENT_TIME, appointment.getAppointmentTime().toString());

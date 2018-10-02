@@ -3,9 +3,9 @@ package com.rand.fitnesstracker;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,7 +26,7 @@ public class AppointmentEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment_edit);
         Bundle extras = getIntent().getExtras();
-        if (extras != null){
+        if (extras != null) {
             customerID = extras.getInt("CUSTOMER_ID");
             appointmentID = extras.getInt("APPOINTMENT_ID");
         }
@@ -43,12 +43,12 @@ public class AppointmentEditActivity extends AppCompatActivity {
             timePicker.setIs24HourView(false);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 timePicker.setHour(cal.get(Calendar.HOUR));
-            }else{
+            } else {
                 timePicker.setCurrentHour(cal.get(Calendar.HOUR));
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 timePicker.setMinute(cal.get(Calendar.MINUTE));
-            } else{
+            } else {
                 timePicker.setCurrentMinute(cal.get(Calendar.MINUTE));
             }
             EditText editLocation = findViewById(R.id.edit_location);
@@ -67,24 +67,24 @@ public class AppointmentEditActivity extends AppCompatActivity {
     }
 
     @SuppressWarnings("unused")
-    public void okClick(View view){
+    public void okClick(View view) {
         AppointmentDBHandler dbHandler = new AppointmentDBHandler(this, null, null, 1);
         DatePicker datePicker = findViewById(R.id.appointment_date_picker);
         TimePicker timePicker = findViewById(R.id.appointment_time_picker);
         Calendar cal = Calendar.getInstance();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             cal.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getHour(), timePicker.getMinute());
-        }else{
+        } else {
             cal.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getCurrentHour(), timePicker.getCurrentMinute());
         }
         Timestamp timestamp = new Timestamp(cal.getTimeInMillis());
         EditText editLocation = findViewById(R.id.edit_location);
         int newID = appointmentID;
         Appointment appointment = new Appointment(timestamp, customerID, editLocation.getText().toString());
-        if (appointmentID != -1){
+        if (appointmentID != -1) {
+            appointment.setId(appointmentID);
             dbHandler.modifyAppointment(appointment);
-        }
-        else{
+        } else {
             newID = dbHandler.addAppointment(appointment);
         }
         Intent intent = new Intent(this, AppointmentViewActivity.class);
@@ -94,7 +94,7 @@ public class AppointmentEditActivity extends AppCompatActivity {
     }
 
     @SuppressWarnings("unused")
-    public void cancelClick(View view){
+    public void cancelClick(View view) {
         if (appointmentID != -1) {
             Intent intent = new Intent(this, AppointmentViewActivity.class);
             intent.putExtra("CUSTOMER_ID", customerID);
@@ -122,12 +122,14 @@ public class AppointmentEditActivity extends AppCompatActivity {
                         Intent intent = new Intent(AppointmentEditActivity.this, AppointmentsListActivity.class);
                         intent.putExtra("CUSTOMER_ID", customerID);
                         startActivity(intent);
-                    }});
+                    }
+                });
                 myAlertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
                         // do nothing
-                    }});
+                    }
+                });
                 myAlertDialog.show();
                 return true;
             default:

@@ -6,10 +6,12 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.util.Log;
 
-class CustomerDBHandler extends SQLiteOpenHelper{
+class CustomerDBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
     private static final String DATABASE_NAME = "customerDB.db";
     private static final String TABLE_CUSTOMERS = "customers";
 
@@ -21,10 +23,11 @@ class CustomerDBHandler extends SQLiteOpenHelper{
     private static final String COLUMN_STATE = "state";
     private static final String COLUMN_ZIP = "zip";
     private static final String COLUMN_FITNESS_LEVEL = "fitness_level";
+    private static final String COLUMN_PORTRAIT_LOCATION = "portrait_location";
 
     @SuppressWarnings("unused")
-    public CustomerDBHandler(Context context,String name,
-                             SQLiteDatabase.CursorFactory factory, int version) {
+    CustomerDBHandler(Context context, String name,
+                      SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
@@ -39,7 +42,8 @@ class CustomerDBHandler extends SQLiteOpenHelper{
                 COLUMN_CITY + " TEXT, " +
                 COLUMN_STATE + " TEXT, " +
                 COLUMN_ZIP + " TEXT, " +
-                COLUMN_FITNESS_LEVEL + " TEXT" + ")";
+                COLUMN_FITNESS_LEVEL + " TEXT," +
+                COLUMN_PORTRAIT_LOCATION + " TEXT)";
         db.execSQL(CREATE_CUSTOMERS_TABLE);
 
     }
@@ -50,7 +54,7 @@ class CustomerDBHandler extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    public int addCustomer(Customer customer){
+    int addCustomer(Customer customer) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_FIRST_NAME, customer.getFirstName());
         values.put(COLUMN_LAST_NAME, customer.getLastName());
@@ -59,14 +63,15 @@ class CustomerDBHandler extends SQLiteOpenHelper{
         values.put(COLUMN_STATE, customer.getState());
         values.put(COLUMN_ZIP, customer.getZip());
         values.put(COLUMN_FITNESS_LEVEL, customer.getFitnessLevel());
+        values.put(COLUMN_PORTRAIT_LOCATION, customer.getPortraitLocation().toString());
 
         SQLiteDatabase db = this.getWritableDatabase();
-        int returnValue = (int)db.insert(TABLE_CUSTOMERS, null, values);
+        int returnValue = (int) db.insert(TABLE_CUSTOMERS, null, values);
         db.close();
         return returnValue;
     }
 
-    public Customer findCustomer(int id){
+    Customer findCustomer(int id) {
         String selection = COLUMN_ID + " = ?";
         String[] selectionArgs = {Integer.toString(id)};
         SQLiteDatabase db = this.getWritableDatabase();
@@ -83,15 +88,16 @@ class CustomerDBHandler extends SQLiteOpenHelper{
             customer.setState(cursor.getString(5));
             customer.setZip(cursor.getString(6));
             customer.setFitnessLevel(cursor.getString(7));
+            customer.setPortraitLocation(Uri.parse(cursor.getString(8)));
             cursor.close();
-        }else{
+        } else {
             customer = null;
         }
         db.close();
         return customer;
     }
 
-    public void deleteCustomer(int customerID){
+    void deleteCustomer(int customerID) {
         String selection = COLUMN_ID + " = ?";
         String[] selectionArgs = new String[]{Integer.toString(customerID)};
         SQLiteDatabase db = this.getWritableDatabase();
@@ -99,13 +105,13 @@ class CustomerDBHandler extends SQLiteOpenHelper{
         db.close();
     }
 
-    public Customer[] getAllCustomers(){
+    Customer[] getAllCustomers() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Customer[] customers = new Customer[(int)DatabaseUtils.queryNumEntries(db, TABLE_CUSTOMERS)];
+        Customer[] customers = new Customer[(int) DatabaseUtils.queryNumEntries(db, TABLE_CUSTOMERS)];
         String[] columns = {COLUMN_ID};
-        Cursor cursor = db.query(TABLE_CUSTOMERS, columns,null, null, null, null, null);
+        Cursor cursor = db.query(TABLE_CUSTOMERS, columns, null, null, null, null, null);
         int index = 0;
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             customers[index] = (findCustomer(Integer.parseInt(cursor.getString(0))));
             index++;
         }
@@ -113,7 +119,7 @@ class CustomerDBHandler extends SQLiteOpenHelper{
         return customers;
     }
 
-    public void modifyCustomer(Customer customer){
+    void modifyCustomer(Customer customer) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_FIRST_NAME, customer.getFirstName());
         values.put(COLUMN_LAST_NAME, customer.getLastName());
@@ -122,10 +128,11 @@ class CustomerDBHandler extends SQLiteOpenHelper{
         values.put(COLUMN_STATE, customer.getState());
         values.put(COLUMN_ZIP, customer.getZip());
         values.put(COLUMN_FITNESS_LEVEL, customer.getFitnessLevel());
-        String selection = COLUMN_ID + " = ?";
+        values.put(COLUMN_PORTRAIT_LOCATION, customer.getPortraitLocation().toString());
+        String selection = COLUMN_ID + " = " + customer.getId();
+        Log.d("TAG", "modifyCustomer: " + customer.getId());
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] comparison = {Integer.toString(customer.getId())};
-        db.update(TABLE_CUSTOMERS, values, selection, comparison);
+        db.update(TABLE_CUSTOMERS, values, selection, null);
         db.close();
     }
 }

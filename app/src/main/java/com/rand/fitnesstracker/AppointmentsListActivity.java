@@ -1,15 +1,14 @@
 package com.rand.fitnesstracker;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.util.Arrays;
 
@@ -23,22 +22,22 @@ public class AppointmentsListActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         customerID = -1;
-        if (extras != null){
+        if (extras != null) {
             customerID = extras.getInt("CUSTOMER_ID");
         }
         LinearLayout linearLayout = findViewById(R.id.appointments_linear_layout);
         AppointmentDBHandler appointmentDBHandler = new AppointmentDBHandler(this, null, null, 1);
         Appointment[] appointments = appointmentDBHandler.getAllAppointments(customerID);
         CustomerDBHandler customerDBHandler = new CustomerDBHandler(this, null, null, 1);
-        if (customerID != -1){
+        if (customerID != -1) {
             Customer customer = customerDBHandler.findCustomer(customerID);
             setTitle(customer.getFirstName() + " " + customer.getLastName());
         }
         Arrays.sort(appointments, new SortByNameAppointment());
-        for (Appointment appointment : appointments){
+        for (Appointment appointment : appointments) {
             String buttonText = "";
             Customer currentCustomer;
-            if (customerID == -1){
+            if (customerID == -1) {
                 currentCustomer = customerDBHandler.findCustomer(appointment.getCustomerID());
                 buttonText = currentCustomer.getFirstName() + " " + currentCustomer.getLastName() + " - ";
             }
@@ -61,7 +60,7 @@ public class AppointmentsListActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        if(customerID != -1){
+        if (customerID != -1) {
             inflater.inflate(R.menu.customer_appointments_menu, menu);
         }
         inflater.inflate(R.menu.common_menu, menu);
@@ -80,13 +79,13 @@ public class AppointmentsListActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.log_off:
-                menuFunctions.logOff();
+                menuFunctions.logOff(this);
                 return true;
             case R.id.view_appointments:
-                menuFunctions.viewAllAppointments();
+                menuFunctions.viewAllAppointments(this);
                 return true;
             case R.id.view_customers:
-                menuFunctions.viewAllCustomers();
+                menuFunctions.viewAllCustomers(this);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
